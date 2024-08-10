@@ -1,0 +1,302 @@
+﻿@page "/"
+
+<PageTitle>Dashboard</PageTitle>
+
+<div class="dashboard-container">
+    <div class="summary-card">
+        <h4>Total People</h4>
+        <p>@totalPeople</p>
+    </div>
+    <div class="summary-card">
+        <h4>Average Age</h4>
+        <p>@averageAge</p>
+    </div>
+    <div class="summary-card">
+        <h4>Gender Distribution</h4>
+        <p>@genderDistribution</p>
+    </div>
+
+    <div class="chart-container">
+        <h4>Age Distribution</h4>
+        <canvas id="ageChart" width="400" height="200"></canvas>
+    </div>
+
+    <div class="table-container">
+        <h4>Person Details</h4>
+        <table class="person-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Facebook URL</th>
+                    <th>Civil Status</th>
+                    <th>Notes</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var person in people)
+                {
+                    <tr>
+                        <td>@person.Id</td>
+                        <td>@person.FirstName</td>
+                        <td>@person.LastName</td>
+                        <td>@person.MobileNumber</td>
+                        <td>@person.Email</td>
+                        <td><a href="@person.FacebookURL" target="_blank">@person.FacebookURL</a></td>
+                        <td>@person.CivilStatus</td>
+                        <td>@person.Notes</td>
+                        <td>@person.Age</td>
+                        <td>@person.Gender</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .dashboard-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .summary-card {
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        padding: 20px;
+        width: 200px;
+        text-align: center;
+    }
+
+    .chart-container, .table-container {
+        flex: 1;
+        margin-top: 20px;
+    }
+
+    .person-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+    }
+
+        .person-table th, .person-table td {
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+        }
+
+        .person-table th {
+            background-color: #f5f5f5;
+        }
+</style>
+
+@code{
+    private List<Person> people = new List<Person>
+{
+    new Person
+    {
+        Id = 1,
+        FirstName = "John",
+        LastName = "Doe",
+        MobileNumber = "123-456-7890",
+        Email = "john.doe@example.com",
+        FacebookURL = "https://facebook.com/johndoe",
+        CivilStatus = "Single",
+        Notes = "Loves hiking and outdoor activities.",
+        Age = 30,
+        Gender = "Male"
+    },
+    new Person
+    {
+        Id = 2,
+        FirstName = "Jane",
+        LastName = "Smith",
+        MobileNumber = "234-567-8901",
+        Email = "jane.smith@example.com",
+        FacebookURL = "https://facebook.com/janesmith",
+        CivilStatus = "Married",
+        Notes = "Enjoys painting and has a small art gallery.",
+        Age = 28,
+        Gender = "Female"
+    },
+    new Person
+    {
+        Id = 3,
+        FirstName = "Michael",
+        LastName = "Johnson",
+        MobileNumber = "345-678-9012",
+        Email = "michael.johnson@example.com",
+        FacebookURL = "https://facebook.com/michaeljohnson",
+        CivilStatus = "Divorced",
+        Notes = "Avid reader and part-time writer.",
+        Age = 45,
+        Gender = "Male"
+    },
+    new Person
+    {
+        Id = 4,
+        FirstName = "Emily",
+        LastName = "Davis",
+        MobileNumber = "456-789-0123",
+        Email = "emily.davis@example.com",
+        FacebookURL = "https://facebook.com/emilydavis",
+        CivilStatus = "Single",
+        Notes = "Works as a software engineer and loves coding.",
+        Age = 34,
+        Gender = "Female"
+    },
+    new Person
+    {
+        Id = 5,
+        FirstName = "Chris",
+        LastName = "Brown",
+        MobileNumber = "567-890-1234",
+        Email = "chris.brown@example.com",
+        FacebookURL = "https://facebook.com/chrisbrown",
+        CivilStatus = "Widowed",
+        Notes = "Has a passion for music and plays the guitar.",
+        Age = 50,
+        Gender = "Male"
+    },
+    new Person
+    {
+        Id = 6,
+        FirstName = "Sarah",
+        LastName = "Wilson",
+        MobileNumber = "678-901-2345",
+        Email = "sarah.wilson@example.com",
+        FacebookURL = "https://facebook.com/sarahwilson",
+        CivilStatus = "Married",
+        Notes = "Enjoys gardening and landscape photography.",
+        Age = 29,
+        Gender = "Female"
+    },
+    new Person
+    {
+        Id = 7,
+        FirstName = "David",
+        LastName = "Martinez",
+        MobileNumber = "789-012-3456",
+        Email = "david.martinez@example.com",
+        FacebookURL = "https://facebook.com/davidmartinez",
+        CivilStatus = "Single",
+        Notes = "Tech enthusiast and gadget reviewer.",
+        Age = 37,
+        Gender = "Male"
+    },
+    new Person
+    {
+        Id = 8,
+        FirstName = "Laura",
+        LastName = "Clark",
+        MobileNumber = "890-123-4567",
+        Email = "laura.clark@example.com",
+        FacebookURL = "https://facebook.com/lauraclark",
+        CivilStatus = "Married",
+        Notes = "Fitness trainer and nutritionist.",
+        Age = 31,
+        Gender = "Female"
+    },
+    new Person
+    {
+        Id = 9,
+        FirstName = "James",
+        LastName = "Lewis",
+        MobileNumber = "901-234-5678",
+        Email = "james.lewis@example.com",
+        FacebookURL = "https://facebook.com/jameslewis",
+        CivilStatus = "Divorced",
+        Notes = "Frequent traveler and food blogger.",
+        Age = 42,
+        Gender = "Male"
+    },
+    new Person
+    {
+        Id = 10,
+        FirstName = "Olivia",
+        LastName = "Walker",
+        MobileNumber = "012-345-6789",
+        Email = "olivia.walker@example.com",
+        FacebookURL = "https://facebook.com/oliviawalker",
+        CivilStatus = "Widowed",
+        Notes = "Volunteers at local shelters and loves animals.",
+        Age = 55,
+        Gender = "Female"
+    }
+};
+
+    public class Person
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string MobileNumber { get; set; }
+        public string Email { get; set; }
+        public string FacebookURL { get; set; }
+        public string CivilStatus { get; set; }
+        public string Notes { get; set; }
+        public int Age { get; set; }
+        public string Gender { get; set; }
+    }
+
+    private int totalPeople;
+    private double averageAge;
+    private string genderDistribution;
+
+    protected override void OnInitialized()
+    {
+        totalPeople = people.Count;
+        averageAge = people.Average(p => p.Age);
+        genderDistribution = string.Join(", ", people
+            .GroupBy(p => p.Gender)
+            .Select(g => $"{g.Key}: {g.Count()}"));
+
+        base.OnInitialized();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var ageGroups = people
+                .GroupBy(p => p.Age / 10 * 10) // Group by decade
+                .Select(g => new
+                {
+                    AgeRange = $"{g.Key}-{g.Key + 9}",
+                    Count = g.Count()
+                })
+                .ToList();
+
+            var chartData = new
+            {
+                labels = ageGroups.Select(g => g.AgeRange).ToArray(),
+                datasets = new[]
+                {
+                    new
+                    {
+                        label = "Number of People",
+                        data = ageGroups.Select(g => g.Count).ToArray(),
+                        backgroundColor = "#4CAF50",
+                        borderColor = "#388E3C",
+                        borderWidth = 1
+                    }
+            }
+            };
+
+            JSRuntime.InvokeVoidAsync("createChart", "ageChart", chartData);
+        }
+    }
+
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; }
+}
+
+
